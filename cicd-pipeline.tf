@@ -11,8 +11,8 @@ resource "aws_codebuild_project" "tf-plan" {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "aws/codebuild/amazonlinux2-x86_64-standard:2.0"
     type                        = "LINUX_CONTAINER"
-    
-    image_pull_credentials_type = "CODEBUILD"
+    #privileged_mode             = false
+    image_pull_credentials_type = "SERVICE_ROLE"
     registry_credential{
         credential = var.codepipelinesecret_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -37,8 +37,8 @@ resource "aws_codebuild_project" "tf-apply" {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "aws/codebuild/amazonlinux2-x86_64-standard:2.0"
     type                        = "LINUX_CONTAINER"
-    
-    image_pull_credentials_type = "CODEBUILD"
+    #privileged_mode             = false
+    image_pull_credentials_type = "SERVICE_ROLE"
     registry_credential{
         credential = var.codepipelinesecret_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -71,7 +71,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             version = "1"
             output_artifacts = ["tf-code"]
             configuration = {
-                FullRepositoryId = "shivani3495/terraform/CICD"
+                FullRepositoryId = "shivani3495/codepipelinetf"
                 BranchName   = "master"
                 ConnectionArn = var.codestar_connector_credentials
                 OutputArtifactFormat = "CODE_ZIP"
