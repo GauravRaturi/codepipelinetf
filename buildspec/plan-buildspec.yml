@@ -1,10 +1,19 @@
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - npm i
+      # - npm run lint
   pre_build:
     commands:
-      - terraform init
-      - terraform validate
-  
+      - npm i
+      - npm run test
   build:
     commands:
-      - terraform plan
+      - npm run build
+
+artifacts:
+  files:
+    - "**/*"
