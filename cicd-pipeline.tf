@@ -9,14 +9,11 @@ resource "aws_codebuild_project" "tf-plan" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:2.0"
+    image                       = "aws/codebuild/standard:1.0"
     type                        = "LINUX_CONTAINER"
     #privileged_mode             = false
-    image_pull_credentials_type = "SERVICE_ROLE"
-    registry_credential{
-        credential = var.codepipelinesecret_credentials
-        credential_provider = "SECRETS_MANAGER"
-    }
+    image_pull_credentials_type = "CODEBUILD"
+    
  }
  source {
      type   = "CODEPIPELINE"
@@ -35,18 +32,15 @@ resource "aws_codebuild_project" "tf-apply" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:2.0"
+    image                       = "aws/codebuild/standard:1.0"
     type                        = "LINUX_CONTAINER"
     #privileged_mode             = false
-    image_pull_credentials_type = "SERVICE_ROLE"
-    registry_credential{
-        credential = var.codepipelinesecret_credentials
-        credential_provider = "SECRETS_MANAGER"
-    }
+    image_pull_credentials_type = "CODEBUILD"
+    
  }
  source {
      type   = "CODEPIPELINE"
-     buildspec = file("buildspec/apply-buildspec.yml")
+     buildspec = file("buildspec/plan-buildspec.yml")
  }
 }
 
