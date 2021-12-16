@@ -58,20 +58,28 @@ resource "aws_codepipeline" "cicd_pipeline" {
     stage {
         name = "Source"
         action{
-            name = "Source"
-            category = "Source"
-            owner = "AWS"
-            provider = "CodeStarSourceConnection"
-            version = "1"
             output_artifacts = ["tf-code"]
             configuration = {
-                FullRepositoryId = "shivani3495/codepipelinetf"
-                BranchName   = "master"
-                ConnectionArn = var.codestar_connector_credentials
-                OutputArtifactFormat = "CODE_ZIP"
+                "OAuthToken" = "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"
+                "Branch"               = "master"
+                "Owner"                = "shivani3495"
+                "PollForSourceChanges" = "false"
+                "Repo"                 = "codepipelinetf"
+                
             }
+            input_artifacts = []
+            name            = "Source"
+            output_artifacts = [
+                "tf-code",
+            ]
+            owner     = "ThirdParty"
+            provider  = "GitHub"
+            run_order = 1
+            version   = "1"
         }
     }
+
+
 
     stage {
         name ="Plan"
