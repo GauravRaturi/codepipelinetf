@@ -58,7 +58,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
     stage {
         name = "Source"
         action{
-            output_artifacts = ["tf-code"]
+            
             configuration = {
                 "OAuthToken" = "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"
                 "Branch"               = "master"
