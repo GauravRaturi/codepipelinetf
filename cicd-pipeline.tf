@@ -60,7 +60,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
         action{
             category = "Source"
             configuration = {
-                "OAuthToken" = "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"
+                "OAuthToken" = "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"
                 "Branch"               = "master"
                 "Owner"                = "shivani3495"
                 "PollForSourceChanges" = "false"
