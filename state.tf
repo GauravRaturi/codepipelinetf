@@ -17,7 +17,7 @@ terraform {
     organization = "seasia-organization"
 
     workspaces {
-      name = "codepipelinetf"
+      name = "Api-driven"
     }
   }
 }
