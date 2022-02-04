@@ -1,6 +1,5 @@
 provider "aws"{
-    #profile = "Shivani"
-    region = "us-east-1"
-    
-
+    profile = "gaurav"
+    region = "ap-south-1"
+   
 }
